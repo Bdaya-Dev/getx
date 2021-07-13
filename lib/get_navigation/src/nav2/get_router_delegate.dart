@@ -364,7 +364,7 @@ class GetDelegate extends RouterDelegate<GetNavConfig>
   @override
   Future<bool> popRoute({
     Object? result,
-    PopMode popMode = PopMode.Page,
+    PopMode popMode = PopMode.History,
   }) async {
     //Returning false will cause the entire app to be popped.
     final wasPopup = await handlePopupRoutes(result: result);
@@ -375,9 +375,9 @@ class GetDelegate extends RouterDelegate<GetNavConfig>
       //emulate the old pop with result
       final lastCompleter = _resultCompleter.remove(_popped);
       lastCompleter?.complete(result);
-      return Future.value(true);
+      return true;
     }
-    return Future.value(false);
+    return false;
   }
 
   bool _onPopVisualRoute(Route<dynamic> route, dynamic result) {
